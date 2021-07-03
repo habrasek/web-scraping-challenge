@@ -18,10 +18,38 @@
       <!-- Columns have 12 areas of width to work with. -->
 
       <!-- One third of MEDIUM AND ABOVE SIZE screen (4/12) -->
-      <div class="col-md-12">
-        <h1> {{variable}}</h1>
+      <div class="col-md-6">
+        <h2> Latest News </h2>
+        <h3> {{title}}</h3>
+        <p> {{paragraph}}</p>
       </div>
 
+    </div>
+    
+    <div class = "row">
+
+      <div class="col-md-6">
+        <h2>Image</h2>
+        <img src = {{url}} alt = "Image">
+        
+      </div>
+
+      <div class="col-md-6">
+        {{facts}}
+      </div>
+
+
+    </div>
+
+    <div class = "row">
+      <div class="col-md-12">
+        <h2>Mars Hemispheres</h2>
+    </div>
+    
+    <div class = "row">
+      <div class="col-md-3">
+        {{label1}}
+      <img src = {{url1}} alt= "hemisphere 1">
     </div>
 
   </div>

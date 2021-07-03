@@ -4,7 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import requests
 import urllib
-from flask import Flask
+from flask import Flask, render_template
 import pymongo
 
 app = Flask(__name__)
@@ -18,9 +18,17 @@ def home():
     
     mars = db.mars.find()
     
-    tit = mars[0]['title']
+    title = mars[0]['title']
     
-    return(tit)
+    paragraph = mars[0]['paragraph']
+    
+    facts = mars[0]['facts']
+    
+    img_url = mars[0]['image']
+    
+    dicto = mars[0]['hemispheres']
+    
+    return render_template('index.html', title=title, paragraph = paragraph, facts= facts, url = img_url, url1= dicto[0]['url'], title1 = dicto[0]['title'])
 
 
 
