@@ -4,7 +4,27 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import requests
 import urllib
+from flask import Flask
+import pymongo
 
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    conn = 'mongodb://localhost:27017'
+    client = pymongo.MongoClient(conn)
+
+    db = client.marsDB
+    
+    mars = db.mars.find()
+    
+    tit = mars[0]['title']
+    
+    return(tit)
+
+
+
+@app.route("/scrape")
 def scrape():
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
@@ -80,16 +100,32 @@ def scrape():
     
     browser.quit()
     
-    return {
+    dicto = {
             'title':first_title,
             'paragraph':first_paragraph,
             'image':img_url,
             'facts':comp_html,
             'hemispheres':mars_dict
             }
+    
+    conn = 'mongodb://localhost:27017'
+    client = pymongo.MongoClient(conn)
+
+    db = client.marsDB
+        
+    db.mars.insert_one({
+            'title':first_title,
+            'paragraph':first_paragraph,
+            'image':img_url,
+            'facts':comp_html,
+            'hemispheres':mars_dict
+            })
+    
+    return dicto
 
 
-
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
 
