@@ -17,6 +17,9 @@ def scrape():
 
     titles = soup.find_all('div', class_='content_title')
     paragraphs = soup.find_all('div', class_='article_teaser_body')
+    
+    first_paragraph= paragraphs[0].text
+    first_title = titles[0].text
 
     url2 = 'https://spaceimages-mars.com/'
     browser.visit(url2)
@@ -41,6 +44,8 @@ def scrape():
     comp_df.columns = comp_df.iloc[0]
 
     comp_df = comp_df.drop(comp_df.index[0])
+    
+    comp_html = comp_df.to_html()
 
     url4= 'https://marshemispheres.com/'
     browser.visit(url4)
@@ -74,6 +79,14 @@ def scrape():
         mars_dict.append({'title':mars_titles[n], 'url':mars_titles[n]})
     
     browser.quit()
+    
+    return {
+            'title':first_title,
+            'paragraph':first_paragraph,
+            'image':img_url,
+            'facts':comp_html,
+            'hemispheres':mars_dict
+            }
 
 
 
