@@ -2,6 +2,8 @@
 
 ## Scraped Several Mars Sites to Create the Following Webpage
 
+All done using BeautifulSoup from the [beautifulsoup4](https://pypi.org/project/beautifulsoup4/) library in python
+
 1. Scraped the first headline and paragraph on [the NASA website](https://redplanetscience.com/)
 2. Scraped an image from [a space images website](https://spaceimages-mars.com/)
 3. Scrapped a table from the [Mars Facts Website](https://galaxyfacts-mars.com/)
